@@ -1,0 +1,1 @@
+Projeto para aprendizado de Automação de Testes FrontEnd.
