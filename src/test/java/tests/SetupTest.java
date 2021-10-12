@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pageObjects.CategoryPage;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 import pageObjects.SearchPage;
@@ -64,4 +65,19 @@ public class SetupTest extends BaseTests{
         assertEquals(search.getTextLighter().replace("\"", ""), quest);
         assertThat(search.getTextHeading_counter(), CoreMatchers.containsString(questResultQtd));
     }
+
+    @Test
+    public void testAcessCategoryTShirts() {
+        //iniciar as páginas
+        HomePage home = new HomePage();
+        CategoryPage category = new CategoryPage();
+
+        //clicar na categoria T-SHIRTS
+        //Browser.getCurrentDriver().findElement(By.LinkText("T-SHIRTS")).click();
+        home.clickCategoryTShirts();
+
+        //validar se ao clicar na categoria T-Shirts ocorre o direcionamento correto
+        assertTrue(category.isPageTshirts());
+    }
+
 }
