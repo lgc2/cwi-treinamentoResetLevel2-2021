@@ -17,4 +17,13 @@ public class CategoryPage extends CategoryPageElementMapper {
     public boolean isPageTshirts() {
         return getAuthenticationPageTShirts().contains("T-SHIRTS");
     }
+
+    public void clickProductAddToProductPage() {
+        BasePage.mouseOver(productNameCategory);
+        buttonMoreAddToProductPage.click();
+    }
+
+    public String getProductNameCategory() {
+        return productNameCategory.getText();
+    }
 }
