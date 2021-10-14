@@ -120,4 +120,63 @@ public class SetupTest extends BaseTests{
 
     }
 
+    //Desafio2 - Parte1 - Criar uma conta para novo usuário no site automationpractice
+    @Test
+    public void creatNewUserAccount() {
+        //Iniciar as páginas
+        HomePage home = new HomePage();
+        LoginPage login = new LoginPage();
+        CreateAnAccountPage creatAccount = new CreateAnAccountPage();
+        MyAccountPage myAccountPage = new MyAccountPage();
+
+        //Clicou no botão "Sign in"
+        home.clickBtnLogin();
+
+        //certificando de que está entrando na página de login
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+                .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
+
+        //Preencheu o campo de e-mail a ser cadastrado
+        login.fillEmailCreate();
+
+        //Clicou em "Creat an account"
+        login.clickBtnSubmitCreate();
+
+        //Validação da página "CREATE AN ACCOUNT"
+        System.out.println(creatAccount.createAnAccountPageValidation());
+        assertTrue(creatAccount.createAnAccountPageValidation().equals("CREATE AN ACCOUNT"));
+
+        //Preencheu os campos "First name" e "Last name"
+        creatAccount.fillFirstName();
+        creatAccount.fillLastName();
+
+        //Preencheu o campo "Password"
+        creatAccount.fillAccountPasswd();
+
+        //Preencheu "Date of Birth"
+        creatAccount.clickDateOfBirth();
+
+        //Preencheu "Adress"
+        creatAccount.fillAddress1();
+
+        //Preencheu "City"
+        creatAccount.fillCity();
+
+        //Preencheu "State"
+        creatAccount.clickState();
+
+        //Preencheu "Postal Code"
+        creatAccount.fillPostCode();
+
+        //Preencheu "Mobile phone"
+        creatAccount.fillPhoneMobile();
+
+        //Clicou em "Register"
+        creatAccount.clickSubmitAccount();
+
+        //Validação de que estou realmente na página "MY ACCOUNT" após cadastro realizado com sucesso
+        System.out.println(myAccountPage.getMyAccountPageValidation());
+        assertTrue(myAccountPage.getMyAccountPageValidation().equals("MY ACCOUNT"));
+    }
+
 }
