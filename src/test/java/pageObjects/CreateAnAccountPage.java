@@ -1,7 +1,10 @@
 package pageObjects;
 
 import elementMapper.CreateAnAccountElementMapper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Browser;
 
 public class CreateAnAccountPage extends CreateAnAccountElementMapper {
@@ -12,11 +15,8 @@ public class CreateAnAccountPage extends CreateAnAccountElementMapper {
     }
 
     public String createAnAccountPageValidation() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebDriverWait wait = new WebDriverWait(Browser.getCurrentDriver(), 10);
+        wait.until(ExpectedConditions.textToBePresentInElement(createAnAccountPageValidationWord, "CREATE AN ACCOUNT"));
         return createAnAccountPageValidationWord.getText();
     }
 

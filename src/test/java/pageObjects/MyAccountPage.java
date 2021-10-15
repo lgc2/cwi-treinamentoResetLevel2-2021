@@ -15,4 +15,8 @@ public class MyAccountPage extends MyAccountElementMapper {
         return myAccountPageValidationWord.getText();
     }
 
+    public void clickBtnWomenCategory() {
+        womenCategoryBtn.click();
+    }
+
 }

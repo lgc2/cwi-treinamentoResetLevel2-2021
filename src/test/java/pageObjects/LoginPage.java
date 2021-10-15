@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
+import java.util.Random;
+
 public class LoginPage extends LoginPageElementMapper {
 
     public LoginPage() {
@@ -13,11 +15,11 @@ public class LoginPage extends LoginPageElementMapper {
     }
 
     public void fillEmail() {
-        email.sendKeys("rrsetcwi+autopractice@gmail.com");
+        email.sendKeys("emailqualquerinventado@gmail.com");
     }
 
     public void fillPasswd() {
-        passwd.sendKeys("teste123");
+        passwd.sendKeys("teste123456");
     }
 
     public void clickBtnSubmitLogin() {
@@ -25,7 +27,10 @@ public class LoginPage extends LoginPageElementMapper {
     }
 
     public void fillEmailCreate() {
-        email_create.sendKeys("emailqualquerinventado@gmail.com");
+        Random randomNumber = new Random();
+        String emailAdress = "lgcc" + randomNumber.nextInt(51) + "@gmail.com";
+        System.out.println("E-mail random criado: " + emailAdress);
+        email_create.sendKeys(emailAdress);
     }
 
     public void clickBtnSubmitCreate() {

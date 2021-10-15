@@ -179,4 +179,64 @@ public class SetupTest extends BaseTests{
         assertTrue(myAccountPage.getMyAccountPageValidation().equals("MY ACCOUNT"));
     }
 
+    //Desafio2 - Parte2 - Comprar um produto com a conta criada no teste anterior
+    @Test
+    public void buyAProduct() {
+        //Iniciar as páginas
+        HomePage home = new HomePage();
+        LoginPage login = new LoginPage();
+        MyAccountPage myAccountPage = new MyAccountPage();
+        WomenCategotyPage womenPage = new WomenCategotyPage();
+        ShoppingCartPages cartPages = new ShoppingCartPages();
+
+        //Clicou no botão "Sign in"
+        home.clickBtnLogin();
+
+        //certificando de que está entrando na página de login
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl()
+                .contains(Utils.getBaseUrl().concat("index.php?controller=authentication&back=my-account")));
+
+        //Preencheu e-mail e senha, e clicou em "Sign in"
+        login.fillEmail();
+        login.fillPasswd();
+        login.clickBtnSubmitLogin();
+
+        //Validação de que estou realmente na página "MY ACCOUNT"
+        System.out.println("Validação da página MYACCOUNT: " + myAccountPage.getMyAccountPageValidation());
+        assertTrue(myAccountPage.getMyAccountPageValidation().equals("MY ACCOUNT"));
+
+        //Clicou no botão da categoria "WOMEN"
+        myAccountPage.clickBtnWomenCategory();
+
+        //Validação de que estou realmente na página "Women"
+        System.out.println("Validação da página Women: " + womenPage.womenCategoryPageValidation());
+        assertTrue(womenPage.womenCategoryPageValidation().equals("Women"));
+
+        //Clicou no botão "Add to cart" do produto "Blouse"
+        womenPage.clickBtnAddToCart();
+
+        //Clicou no botão "Proceed to checkout"
+        womenPage.clickButtonModalProceedToCheckout();
+
+        //Validações na página "SHOPPING-CART SUMMARY"
+        System.out.println("Validação da página 1 do carrinho: " + cartPages.getShoppingCartValidationText());
+        assertTrue(cartPages.getShoppingCartValidationText().contains("SHOPPING-CART SUMMARY"));
+            //Validação do nome do produto "Blouse"
+        System.out.println("Nome do produto: " + cartPages.getProductNameValidation());
+        assertEquals(cartPages.getProductNameValidation(), "Blouse");
+            //Validação do preço total: $27.00 + $2.00 + $1.16 = $30.16
+        System.out.println("Preço total: " + cartPages.getTotalPrice());
+        assertEquals(cartPages.getTotalPrice(), "$30.16");
+            //Validação do endereço
+        System.out.println("Endereço: " + cartPages.getAddress());
+        assertEquals(cartPages.getAddress(), "Street address, P.O. Box, Company name, etc.");
+            //Validação da cidade, estado e código postal
+        System.out.println("Cidade, estado e código postal: " + cartPages.getCityStateZipcode());
+        assertEquals(cartPages.getCityStateZipcode(), "Itajuba, Alabama 12345");
+            //Validação do número de telefone
+        System.out.println("Número de telefone: " + cartPages.getPhoneMobile());
+        assertEquals(cartPages.getPhoneMobile(), "123456");
+
+    }
+
 }
