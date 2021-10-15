@@ -9,6 +9,8 @@ import pageObjects.*;
 import utils.Browser;
 import utils.Utils;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class SetupTest extends BaseTests{
@@ -188,6 +190,9 @@ public class SetupTest extends BaseTests{
         MyAccountPage myAccountPage = new MyAccountPage();
         WomenCategotyPage womenPage = new WomenCategotyPage();
         ShoppingCartPages cartPages = new ShoppingCartPages();
+        ShoppingCartAddressPage addressValidationPage = new ShoppingCartAddressPage();
+        ShoppingCartShippingPage shippingPage = new ShoppingCartShippingPage();
+        ShoppingCartPaymentPage paymentPage = new ShoppingCartPaymentPage();
 
         //Clicou no botão "Sign in"
         home.clickBtnLogin();
@@ -236,6 +241,58 @@ public class SetupTest extends BaseTests{
             //Validação do número de telefone
         System.out.println("Número de telefone: " + cartPages.getPhoneMobile());
         assertEquals(cartPages.getPhoneMobile(), "123456");
+
+        //Clicou no botão "Proceed to checkout" na página "SHOPPING-CART SUMMARY"
+        cartPages.clickBtnProceedToCheckout();
+
+        //Validação de que estou realmente na página "Address" (etapa 03) do carrinho de compras
+        System.out.println("Validação da página Address: " + addressValidationPage.shoppingCartAddressPageValidation());
+        assertEquals(addressValidationPage.shoppingCartAddressPageValidation(), "ADDRESSES");
+
+        //Validações do Billing Address
+        System.out.println(Arrays.toString(addressValidationPage.shoppingCartAddressPageBillingInformations()));
+        assertEquals(addressValidationPage.shoppingCartAddressPageBillingInformations()[0], "lg cc");
+        assertEquals(addressValidationPage.
+                shoppingCartAddressPageBillingInformations()[1], "Street address, P.O. Box, Company name, etc.");
+        assertEquals(addressValidationPage.
+                shoppingCartAddressPageBillingInformations()[2], "Itajuba, Alabama 12345");
+        assertEquals(addressValidationPage.shoppingCartAddressPageBillingInformations()[3], "123456");
+
+        //Clicou no botão "Proceed to checkout" na página "ADDRESSES" do carrinho de compras
+        addressValidationPage.clickBtnProceedToCheckOutAddressesPage();
+
+        //Validação de que estou realmente na página "Shipping" (etapa 04) do carrinho de compras
+        System.out.println("Validação da página Shipping: " + shippingPage.shoppingCartShippingPageValidation());
+        assertEquals(shippingPage.shoppingCartShippingPageValidation(), "SHIPPING");
+
+        //Clicou no aceite do "Terms of service"
+        shippingPage.clickAgree();
+
+        //Clicou no botão "Proceed to checkout" na página "SHIPPING" do carrinho de compras
+        shippingPage.clickBtnProceedToCheckOutShippingPage();
+
+        //Validação de que estou realmente na página "Payment" (etapa 05) do carrinho de compras
+        System.out.println("Validação da página Payment: " + paymentPage.shoppingCartPaymentPageValidation());
+        assertEquals(paymentPage.shoppingCartPaymentPageValidation(), "PLEASE CHOOSE YOUR PAYMENT METHOD");
+
+        //Validação de que o preço total está correto: $30.16
+        System.out.println("Preço total na Payment Page: " + paymentPage.totalPriceValidation());
+        assertEquals(paymentPage.totalPriceValidation(), "$30.16");
+
+        //Clicou no botão "Pay by bank wire" na pégina "Payment"
+        paymentPage.clickBtnPayByBankWire();
+
+        //Clicou no botão "I confirm my order" na página "Payment"
+        paymentPage.clickBtnIConfirmMyOrder();
+
+        //Validação de que fui redirecionado para a página de confirmação da compra: "ORDER CONFIRMATION"
+        System.out.println("Validação da página Order Confirmation: " + paymentPage.orderConfirmationValidation());
+        assertEquals(paymentPage.orderConfirmationValidation(), "ORDER CONFIRMATION");
+
+        //validação do valor total ("Amount") na página "ORDER CONFIRMATION"
+        System.out.println("Montante total na página Order Confirmation: "
+                + paymentPage.amountInOrderConfirmationPageValidation());
+        assertEquals(paymentPage.amountInOrderConfirmationPageValidation(), "$30.16");
 
     }
 

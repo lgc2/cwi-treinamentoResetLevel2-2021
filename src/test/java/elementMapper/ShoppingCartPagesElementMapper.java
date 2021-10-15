@@ -22,4 +22,7 @@ public class ShoppingCartPagesElementMapper {
 
     @FindBy(css = "#center_column > div.order_delivery.clearfix.row > div:nth-child(1) > ul > li:nth-child(6) > span")
     public WebElement phoneMobile;
+
+    @FindBy(css = "#center_column > p.cart_navigation.clearfix > a.button-medium > span")
+    public WebElement btnProceedToCheckout;
 }

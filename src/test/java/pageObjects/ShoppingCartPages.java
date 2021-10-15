@@ -34,4 +34,8 @@ public class ShoppingCartPages extends ShoppingCartPagesElementMapper {
         return phoneMobile.getText();
     }
 
+    public void clickBtnProceedToCheckout() {
+        btnProceedToCheckout.click();
+    }
+
 }
