@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,15 +15,18 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+@Feature("Testes site de ecommerce")
 public class SetupTest extends BaseTests{
 
     @Test
+    @Story("Abrir o site")
     public void testOpeningBrowserAndLoadingPage() {
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
         System.out.println("Abrimos o navegador e carregamos a url!");
     }
 
     @Test
+    @Story("Realizar o login")
     public void testLogin() {
         //Iniciar as páginas
         HomePage home = new HomePage();
@@ -67,6 +72,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Acessar categoria")
     public void testAcessCategoryTShirts() {
         //iniciar as páginas
         HomePage home = new HomePage();
@@ -81,6 +87,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Acessar página de produto")
     public void testAddProductToProductPage() {
         //acessar categoria T-Shirts
         testAcessCategoryTShirts();
@@ -100,6 +107,7 @@ public class SetupTest extends BaseTests{
     }
 
     @Test
+    @Story("Adicionar produto ao carrinho")
     public void testAddProductToCartPage() {
         //acessa a página de produto
         testAddProductToProductPage();
@@ -124,6 +132,7 @@ public class SetupTest extends BaseTests{
 
     //Desafio2 - Parte1 - Criar uma conta para novo usuário no site automationpractice
     @Test
+    @Story("Cadastrar uma nova conta de usuário")
     public void creatNewUserAccount() {
         //Iniciar as páginas
         HomePage home = new HomePage();
@@ -181,8 +190,9 @@ public class SetupTest extends BaseTests{
         assertTrue(myAccountPage.getMyAccountPageValidation().equals("MY ACCOUNT"));
     }
 
-    //Desafio2 - Parte2 - Comprar um produto com a conta criada no teste anterior
+    //Desafio2 - Parte2 - Comprar um produto desde a página HomePage, passando pelo login, até conclusão com sucesso
     @Test
+    @Story("Comprar um produto - processo completo")
     public void buyAProduct() {
         //Iniciar as páginas
         HomePage home = new HomePage();

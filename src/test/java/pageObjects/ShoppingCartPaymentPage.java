@@ -1,6 +1,7 @@
 package pageObjects;
 
 import elementMapper.ShoppingCartPaymentPageElementMapper;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
@@ -18,10 +19,12 @@ public class ShoppingCartPaymentPage extends ShoppingCartPaymentPageElementMappe
         return totalPricePaymentPage.getText();
     }
 
+    @Step("Clicou no botão Pay by bank wire da página 05 do carrinho de compras")
     public void clickBtnPayByBankWire() {
         btnPayByBankWire.click();
     }
 
+    @Step("Clicou no botão I confirm my order")
     public void clickBtnIConfirmMyOrder() {
         btnIConfirmMyOrder.click();
     }

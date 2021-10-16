@@ -1,6 +1,7 @@
 package pageObjects;
 
 import elementMapper.ShoppingCartAddressPageElementMapper;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
@@ -24,6 +25,7 @@ public class ShoppingCartAddressPage extends ShoppingCartAddressPageElementMappe
         return billingInformations;
     }
 
+    @Step("Clicou no botão Proceed to checkout da página 03 do carrinho de compras")
     public void clickBtnProceedToCheckOutAddressesPage() {
         btnProceedToCheckOutAddressesPage.click();
     }
